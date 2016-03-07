@@ -1,0 +1,21 @@
+{
+  "default_attributes": {
+    "_common_attrs": {
+      "test": {
+        "last_namespace": "_common_attrs",
+        "namespaces": {
+          "_common_attrs": true
+        }
+      }
+    },
+    "test": {
+      "environments": {
+        "common_attrs": true
+      },
+      "top_level": "common_attrs",
+      "nested_level": {
+        "nested_field": "common_attrs"
+      }
+    }
+  }
+}

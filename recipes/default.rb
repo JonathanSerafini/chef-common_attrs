@@ -1,5 +1,5 @@
-#
-# Cookbook Name:: common_attrs
-# Recipe:: default
-#
-# Copyright (c) 2016 The Authors, All Rights Reserved.
+
+include_recipe "#{cookbook_name}::environments"
+include_recipe "#{cookbook_name}::namespaces"
+include_recipe "#{cookbook_name}::secrets"
+
