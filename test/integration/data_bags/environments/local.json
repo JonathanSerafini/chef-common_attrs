@@ -1,0 +1,21 @@
+{
+  "default_attributes": {
+    "_local": {
+      "test": {
+        "last_namespace": "_local",
+        "namespaces": {
+          "_local": true
+        }
+      }
+    },
+    "test": {
+      "environments": {
+        "local": true
+      },
+      "top_level": "local",
+      "nested_level": {
+        "nested_field": "local"
+      }
+    }
+  }
+}

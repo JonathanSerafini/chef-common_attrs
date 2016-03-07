@@ -1,0 +1,31 @@
+{
+  "default_attributes": {
+    "__default": {
+      "test": {
+        "last_namespace": "_default",
+        "namespaces": {
+          "_default": true
+        }
+      }
+    },
+    "test": {
+      "environments": {
+        "_default": true
+      },
+      "top_level": "_default",
+      "nested_level": {
+        "nested_field": "_default"
+      }
+    },
+    "common_attrs": {
+      "secrets": {
+        "active": {
+          "test.nested_secret": {
+            "secrets_item": "item",
+            "secrets_path": "nested.nested_secret"
+          }
+        }
+      }
+    }
+  }
+}
