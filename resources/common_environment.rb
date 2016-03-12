@@ -2,8 +2,8 @@
 # pattern which is used with Policy Files to replicate the concept of a global
 # configuration space.
 #
-# Essentially, this will load a data_bag_item and then apply it at the desired
-# precedence level.
+# This will load an (protentially encrypted) data_bag_item and then apply it 
+# at the desired precedence level.
 #
 # @since 0.1.0
 # @example

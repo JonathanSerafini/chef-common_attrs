@@ -22,27 +22,39 @@ Any
 
 # Documentation
 
-Comments may be found in both the attribute files as well as the specific Custom Resources and will provide most of the documentation.
+Commons will be found throughout the attribute, resource and library files
+so that the documentation and code are more closely linked. What's found in 
+this Readme will be more of a high-level overview.
+
+## Library Methods
+
+This cookbook provides a number of helper methods and injects a few of them
+by monkey patching DataBagItem, Node::Atributes and Resource. Documentation
+on each of these may be found within the library files.
+
+- Hash.dig
+- Hash.dig=
+- Resource.common_properties
+- DataBagItem.to_common_data
+- DataBagItem.to_common_namespace
+- Attribute.to_common_Data
+- Attribute.to_common_namespace
+- Comon::Delegator::ObfuscatedType
 
 ## Attribute Precedence
 
 Given that we're dealing with Attributes, special care needs to be taken to ensure that we don't get lost in the myriad of different precedence levels.
 
-- cookbook Attribute default
-- cookbook Recipe default
-- *optional* Environment default
-- *added* common_environment default
-- *added* common_namespace default
-- *optional* Role default
-- *optional* PolicyFile default
-- *optional* cookbook Attribute force_default
-- *optional* cookbook Recipe force_default
-- *added* common_secrets force_default
-- cookbook Attribute normal
-- cookbook Recipe normal
-- *optional* override, force_override
-
-## Custom Resources
-
-*TODO* :D
+|new?|source|precedence level|
+|---|---|---|
+|no|cookbook.attribute|default|
+|no|cookbook.recipe|default|
+|no|environment|environment_default|
+|yes|common_environment|environment_default|
+|yes|common_namespace|environment_default|
+|no|role|role_default|
+|no|policy_file|role_default|
+|yes|common_secrets|force_default|
+|no|cookbook.attribute|normal|
+|no|cookbook.recipe|normal|
 

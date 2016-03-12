@@ -14,3 +14,6 @@ bin/*
 
 .kitchen/
 .kitchen.local.yml
+
+# Policyfile lock is ignored
+Policyfile.lock.json
