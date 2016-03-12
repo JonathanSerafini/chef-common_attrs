@@ -20,7 +20,7 @@ module Common
 
       # Optionally include the DigLookup module only if it was not previously
       # defined so as to not overwrite Ruby 2.3's method if it is available.
-      def self.included?(base)
+      def self.included(base)
         base.instance_eval do
           unless respond_to?(:dig)
             send(:include, Common::Mixin::DiggableHash::DigLookup)
