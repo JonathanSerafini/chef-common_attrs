@@ -3,6 +3,10 @@ module Common
     module NamespacedHash
       # Return this object as a Hash, with all namespaces applied to the top
       # level.
+      #
+      # @param *namespaces [String,Symbol] an arbitrary amount of namespaces
+      # @return [Mash]
+      # @since 0.1.0
       def to_common_namespace(*namespaces)
         prefix = Chef.run_context.node[:common_attrs][:namespaces][:prefix]
 

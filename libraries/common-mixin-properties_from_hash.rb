@@ -1,6 +1,12 @@
 module Common
   module Mixin
     module PropertiesFromHash
+      # Provides a method to load resource properties from a Hash type object,
+      # such as a DataBagItem or Node::Attribute, while also ensuring that we
+      # will be friendly a skip any unsupported properties.
+      #
+      # @param hash [Hash] the properties to set
+      # @since 0.1.0
       def common_properties(hash)
         hash = {} if hash.nil?
 

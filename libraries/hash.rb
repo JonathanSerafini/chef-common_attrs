@@ -1,5 +1,5 @@
+# Monkey patch Hash by including additional modules
+#
 require_relative 'common-mixin-diggable_hash'
 
-unless Hash.new.respond_to?(:dig)
-  Hash.send(:include, Common::Mixin::DiggableHash)
-end
+Hash.send(:include, Common::Mixin::DiggableHash)
