@@ -53,7 +53,7 @@ Given that we're dealing with Attributes, special care needs to be taken to ensu
 |yes|common_environment|environment_default|
 |yes|common_namespace|environment_default|
 |no|role|role_default|
-|no|role|policy_file default|
+|no|policy_file|role_default|
 |yes|common_secrets|force_default|
 |no|cookbook.attribute|normal|
 |no|cookbook.recipe|normal|
