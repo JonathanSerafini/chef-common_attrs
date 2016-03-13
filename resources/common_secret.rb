@@ -43,7 +43,7 @@ end
 action :apply do
   # Ensure that the secret is added to the attribute blacklist to ensure
   # that it is not saved back to the chef server.
-  node.default[:common_attrs][:blacklists][attribute_path] = true
+  node.default[:common_attrs][:obfuscated][attribute_path] = true
 
   # Automatically load the data_bag_item to run_state if it has not already
   # been loaded.

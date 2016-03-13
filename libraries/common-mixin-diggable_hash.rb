@@ -37,7 +37,7 @@ module Common
       # @param *path [String,Symbol] * keys describing the path
       # @param value [Mix] the last provided argument is the value to set
       # @since 0.1.0
-      def dig=(*path, value)
+      def common_assign_at(*path, value)
         last_item = path.pop
         dig(*path)[last_item] = value
       end

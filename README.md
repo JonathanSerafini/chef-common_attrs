@@ -10,6 +10,8 @@ Specifically, this cookbook will provide the following Custom Resources :
 * *common_secrets*: Load a data_bag_item and save it under `node.run_state` to be used for further purposes.
 * *common_secret*: Load a `common_secrets` if required, and copy one of it's attributes onto the node at the `force_default` precedence level. Additionally, ensure that the value will not be sent to your Chef Server.
 
+In addition, it provides the recipe `obfuscated` which allows you to blacklist attributes prior to reporting back to Chef server.
+
 *Be advised* that this cookbook provides you with all of the necessary tools to shoot yourself in the foot ... repeatedly ... so much so that you may end up a bloody mess. When making use of any of the Custon Resources contained within, you should be sure to have a workflow in mind. 
 
 # Requirements
@@ -33,11 +35,11 @@ by monkey patching DataBagItem, Node::Atributes and Resource. Documentation
 on each of these may be found within the library files.
 
 - Hash.dig
-- Hash.dig=
+- Hash.common_assign_at
 - Resource.common_properties
 - DataBagItem.to_common_data
 - DataBagItem.to_common_namespace
-- Attribute.to_common_Data
+- Attribute.to_common_data
 - Attribute.to_common_namespace
 - Comon::Delegator::ObfuscatedType
 

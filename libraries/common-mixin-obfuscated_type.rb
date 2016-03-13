@@ -13,15 +13,6 @@ module Common
       def to_text
         "**suppressed sensitive output**"
       end
-
-      # Provide a method to ensure that the object will not be exported to 
-      # Chef server during the final report. 
-      #
-      # @return [Json] the obfuscated string in Json format
-      # @since 0.1.0
-      def to_json(*args)
-        to_text.to_json(*args)
-      end
     end
   end
 end
