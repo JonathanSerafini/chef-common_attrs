@@ -1,6 +1,8 @@
 name 'common_attrs'
 maintainer 'Jonathan Serafini'
 maintainer_email 'jonathan@serafini.ca'
+source_url 'https://github.com/JonathanSerafini/chef-common_attrs'
+issues_url 'https://github.com/JonathanSerafini/chef-common_attrs/issues'
 license 'apachev2'
 description 'Resourced to help manage Chef attributes'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
