@@ -62,6 +62,8 @@ Documentation on each of these may be found within the library files.
 - Resource.common_properties
 - DataBagItem.to_common_data
 - DataBagItem.to_common_namespace
+- EncryptedDataBagItem.to_common_data
+- EncryptedDataBagItem.to_common_namespace
 - Attribute.to_common_data
 - Attribute.to_common_namespace
 - Comon::Delegator::ObfuscatedType
