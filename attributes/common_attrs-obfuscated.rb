@@ -20,6 +20,3 @@
 # ```
 default[:common_attrs][:obfuscated] ||= {}
 
-default[:common_attrs][:blarg] = "STRING"
-default[:common_attrs][:obfuscated]["common_attrs.blarg"] = true
-
