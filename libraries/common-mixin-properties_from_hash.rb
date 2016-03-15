@@ -12,6 +12,8 @@ module Common
 
         data = if hash.respond_to?(:to_common_data)
                then hash.to_common_data
+               elsif hash.respond_to?(:to_hash)
+               then hash.to_hash
                else hash.to_h
                end 
 
