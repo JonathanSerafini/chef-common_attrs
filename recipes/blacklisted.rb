@@ -11,15 +11,27 @@ Chef.event_handler do
     node[:common_attrs][:blacklisted].each do |key, value|
       # Skip unless enabled
       next if value === false
+      
+      attribute_path = key.split('.')
 
       # Skip if attribute is not found
-      next unless node.dig *key.split('.')
+      next unless node.dig *attribute_path
 
       # Because logging
       Chef::Log.debug "Blacklisting attribute #{key}"
 
-      # Delete attribute, otherwise it doesnt work
-      node.rm *key.split('.')
+      # Delete attribute
+      node.rm *attribute_path
+      attribute_path.pop
+
+      # Delete any empty nestings
+      while attribute_path.any? do
+        attribute_value = node.dig *attribute_path
+        break unless attribute_value.empty?
+
+        node.rm *attribute_path
+        attribute_path.pop
+      end
     end
   end
 end
