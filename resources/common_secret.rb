@@ -31,6 +31,16 @@ property :compile_time,
   default: lazy { node[:common_attrs][:secrets][:compile_time] },
   desired_state: false
 
+# Ensure that the resource is applied regardless of whether we are in why_run
+# or standard mode.
+#
+# Refer to chef/chef#4537 for this uncommon syntax
+action_class do
+  def whyrun_supported?
+    true
+  end
+end
+
 # When compile_time is defined, apply the action immediately and then set the
 # action :nothing to ensure that it does not run a second time.
 def after_created
@@ -50,29 +60,26 @@ action :apply do
   r = common_secrets "#{secrets_bag}.#{secrets_item}" do
     secrets_bag new_resource.secrets_bag
     secrets_item new_resource.secrets_item
-    compile_time false
+    compile_time true
   end
 
-  ruby_block "apply attribute secret" do
-    block do
-      # To fetch the data from run_state we require the 
-      # common_secrets.secret_name
-      secrets_name = r.secrets_name
-      secrets = node.run_state[:common_secrets][secrets_name]
-      secret = secrets.dig(*secrets_path.split('.'))
+  # To fetch the data from run_state we require the 
+  # common_secrets.secret_name
+  secrets_name = r.secrets_name
+  ecrets_path = new_resource.secrets_path
+  secrets = node.run_state[:common_secrets][secrets_name]
+  secret = secrets.dig(*secrets_path.split('.'))
 
-      # Set the value as an ObfuscatedType to ensure that the output
-      # is never exposed to Chef Server
-      secret = Common::Delegator::ObfuscatedType.new(secret)
+  # Set the value as an ObfuscatedType to ensure that the output
+  # is never exposed to Chef Server
+  secret = Common::Delegator::ObfuscatedType.new(secret)
 
-      unless secret
-        raise KeyError.new "secret not found with path #{secrets_path}"
-      end
-
-      hash = generate_secret_hash(attribute_path, secret)
-      apply_hash(:force_default, hash)
-    end
+  unless secret
+    raise KeyError.new "secret not found with path #{secrets_path}"
   end
+
+  hash = generate_secret_hash(attribute_path, secret)
+  apply_hash(:force_default, hash)
 end
 
 # Create a nested hash to use when merging onto node attributes for a secret.

@@ -49,10 +49,18 @@ def after_created
   end
 end
 
-action :apply do
-  converge_by "applying attributes for #{namespace}" do
-    apply_hash(fetch_attribute("#{prefix}#{namespace}", {}))
+# Ensure that the resource is applied regardless of whether we are in why_run
+# or standard mode.
+#
+# Refer to chef/chef#4537 for this uncommon syntax
+action_class do
+  def whyrun_supported?
+    true
   end
+end
+
+action :apply do
+  apply_hash(fetch_attribute("#{prefix}#{namespace}", {}))
 end
 
 # Lookup an attribute by array or comma delimited list

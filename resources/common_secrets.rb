@@ -28,6 +28,16 @@ property :compile_time,
   default: lazy { node[:common_attrs][:secrets][:compile_time] },
   desired_state: false
 
+# Ensure that the resource is applied regardless of whether we are in why_run
+# or standard mode.
+#
+# Refer to chef/chef#4537 for this uncommon syntax
+action_class do
+  def whyrun_supported?
+    true
+  end
+end
+
 # When compile_time is defined, apply the action immediately and then set the
 # action :nothing to ensure that it does not run a second time.
 def after_created
@@ -37,23 +47,15 @@ def after_created
   end
 end
 
-# If the secrets have already been applied do nothing
-load_current_value do
-  run_state = node.run_state
-
-  if run_state[:common_secrets] and run_state[:common_secrets][secrets_name]
-    new_resource.state_properties.keys.each do |key|
-      send(key.to_sym, new_resource.send(key.to_sym))
-    end
-  else current_value_does_not_exist!
-  end
-end
-
 # Include Chef DSL methods to load data_bag_items
 include Chef::DSL::DataQuery
 
 action :apply do
-  converge_if_changed do
+  run_state = node.run_state
+
+  if run_state[:common_secrets] and run_state[:common_secrets][secrets_name]
+    @new_Resource.updated_by_last_action(false)
+  else
     data = data_bag_item(new_resource.secrets_bag, new_resource.secrets_item)
     data = data.to_common_namespace
     node.run_state[:common_secrets] ||= {}

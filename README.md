@@ -50,6 +50,7 @@ Resource which will load a secret from `common_secret` and apply it's value to a
 - namespaces: Load `common_namespace` from attributes
 - secrets: Load `common_secret` from attributes
 - obfuscated: Register a Chef Event handler to obfuscate attributes at the end of the converge phase.
+- blacklisted: Register a Chef Event handler to delete attributes at the end of the converge phase.
 
 # Library Methods
 
