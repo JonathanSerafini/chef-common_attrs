@@ -43,6 +43,16 @@ property :ignore_missing,
   kind_of: [TrueClass, FalseClass],
   default: lazy { node[:common_attrs][:environments][:ignore_missing] }
 
+# Ensure that the resource is applied regardless of whether we are in why_run
+# or standard mode.
+#
+# Refer to chef/chef#4537 for this uncommon syntax
+action_class do
+  def whyrun_supported?
+    true
+  end
+end
+
 # When compile_time is defined, apply the action immediately and then set the
 # action :nothing to ensure that it does not run a second time.
 def after_created
@@ -55,24 +65,22 @@ end
 # Apply a data_bag environment file to node attributes
 #
 action :apply do
-  converge_by "applying attributes for #{environment}" do
-    item_data = fetch_item(data_bag, environment)
+  item_data = fetch_item(data_bag, environment)
 
-    item_data.keys.each do |item_precedence|
-      item_data[item_precedence].keys.each do |key|
-        Chef::Log.debug("#{self} applying #{item_precedence} to node.#{key}")
-      end
+  item_data.keys.each do |item_precedence|
+    item_data[item_precedence].keys.each do |key|
+      Chef::Log.debug("#{self} applying #{item_precedence} to node.#{key}")
     end
+  end
 
-    case precedence
-    when "environment"
-      apply_hash(:env_default, item_data.fetch(:default_attributes, {}))
-      apply_hash(:env_override, item_data.fetch(:override_attributes, {}))
-    when "role"
-      apply_hash(:role_default, item_data.fetch(:default_attributes, {}))
-      apply_hash(:role_override, item_data.fetch(:override_attributes, {}))
-    else raise ArgumentError.new "invalid scope defined: #{scope}"
-    end
+  case precedence
+  when "environment"
+    apply_hash(:env_default, item_data.fetch(:default_attributes, {}))
+    apply_hash(:env_override, item_data.fetch(:override_attributes, {}))
+  when "role"
+    apply_hash(:role_default, item_data.fetch(:default_attributes, {}))
+    apply_hash(:role_override, item_data.fetch(:override_attributes, {}))
+  else raise ArgumentError.new "invalid scope defined: #{scope}"
   end
 end
 
