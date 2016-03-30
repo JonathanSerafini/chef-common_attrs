@@ -66,7 +66,7 @@ action :apply do
   # To fetch the data from run_state we require the 
   # common_secrets.secret_name
   secrets_name = r.secrets_name
-  ecrets_path = new_resource.secrets_path
+  secrets_path = new_resource.secrets_path
   secrets = node.run_state[:common_secrets][secrets_name]
   secret = secrets.dig(*secrets_path.split('.'))
 
