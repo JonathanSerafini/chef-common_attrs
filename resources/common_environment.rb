@@ -30,7 +30,7 @@ property :data_bag,
 # The level of precendence to apply attributes at
 property :precedence,
   kind_of: String,
-  equal_to: ["environment","role"],
+  equal_to: ["environment","role","node"],
   default: "environment"
 
 # Whether to apply the resource at compile time
@@ -80,6 +80,8 @@ action :apply do
   when "role"
     apply_hash(:role_default, item_data.fetch(:default_attributes, {}))
     apply_hash(:role_override, item_data.fetch(:override_attributes, {}))
+  when "node"
+    apply_hash(:default, item_data.fetch(:default_attributes, {}))
   else raise ArgumentError.new "invalid scope defined: #{scope}"
   end
 end
