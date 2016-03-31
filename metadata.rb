@@ -7,4 +7,4 @@ license 'apachev2'
 description 'Resourced to help manage Chef attributes'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 chef_version '>= 12.7'
-version '0.1.6'
+version '0.2.0'
