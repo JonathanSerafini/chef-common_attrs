@@ -51,10 +51,6 @@ def after_created
 end
 
 action :apply do
-  # Ensure that the secret is added to the attribute blacklist to ensure
-  # that it is not saved back to the chef server.
-  node.default[:common_attrs][:obfuscated][attribute_path] = true
-
   # Automatically load the data_bag_item to run_state if it has not already
   # been loaded.
   r = common_secrets "#{secrets_bag}.#{secrets_item}" do
@@ -72,7 +68,7 @@ action :apply do
 
   # Set the value as an ObfuscatedType to ensure that the output
   # is never exposed to Chef Server
-  secret = Common::Delegator::ObfuscatedType.new(secret)
+  secret = obfuscate(secret, attribute_path)
 
   unless secret
     raise KeyError.new "secret not found with path #{secrets_path}"
@@ -80,6 +76,20 @@ action :apply do
 
   hash = generate_secret_hash(attribute_path, secret)
   apply_hash(:force_default, hash)
+end
+
+# Obfuscate Array and String values and walk through Hashes looking for items
+# to obfuscate. Each time, ensure that the entry is logged to attributes to
+# ensure that it is cleaned up at the end of the Chef run.
+def obfuscate(data, path)
+  if data.is_a?(Hash)
+    return data.map{|k,v| [k,obfuscate(v, [path,k].join("."))]}.to_h
+  else
+    # Ensure that the secret is added to the attribute blacklist to ensure
+    # that it is not saved back to the chef server.
+    node.default[:common_attrs][:obfuscated][path] = true
+    return Common::Delegator::ObfuscatedType.new(data)
+  end
 end
 
 # Create a nested hash to use when merging onto node attributes for a secret.
