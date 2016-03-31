@@ -89,6 +89,8 @@ def apply_hash(hash)
     destination.env_default = DeepMerge.merge(destination.env_default, hash)
   when "role"
     destination.role_default = DeepMerge.merge(destination.role_default, hash)
+  when "node"
+    destination.default = DeepMerge.merge(destination.default, hash)
   else raise ArgumentError.new "Invalid scope defined: #{scope}"
   end
 end
