@@ -31,7 +31,14 @@ property :data_bag,
 property :precedence,
   kind_of: String,
   equal_to: ["environment","role","node"],
-  default: "environment"
+  default: lazy { |r|
+    case r.environment.split("_").first
+    when "env" then "environment"
+    when "role" then "role"
+    when "node" then "node"
+    else "environment"
+    end
+  }
 
 # Whether to apply the resource at compile time
 property :compile_time,
