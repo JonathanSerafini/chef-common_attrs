@@ -30,14 +30,7 @@ property :destination,
 # The level of precendence to apply attributes at
 property :precedence,
   kind_of: String,
-  default: lazy { |r|
-    case r.namespace.split("_").first
-    when "env" then "environment"
-    when "role" then "role"
-    when "node" then "node"
-    else "environment"
-    end
-  }
+  default: "environment"
 
 # An optional prefix to prepend to the namespace name
 property :prefix,

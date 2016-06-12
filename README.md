@@ -77,7 +77,7 @@ Actions
 Properties
 * environment: (name attribute) The name of the data_bag_item to load.
 * data_bag: The data_bag to load from. This defaults to *node.common_attrs.environments.data_bag*.
-* precedence: The precedence level to apply to, which may be either environment, role or node. By default, this will attempt to auto-detect based on the name of the environment where a prefix of env_, role_ or node_ would refer to those respective levels.
+* precedence: The precedence level to apply to, which may be either environment, role or node.
 * compile_time: Whether to apply the environment during compile or converge time.
 * ignore_missing: Whether to throw an exception if the data_bag_item is missing.
 
@@ -156,7 +156,7 @@ Actions
 Properties
 * namespace: (name attribute) The name of the namespace to apply.
 * destination: A period separated path to the attribute to apply this namespace to, defaulting to the root level of the node.
-* precedence: The precedence level to apply to, which may be either environment, role or node. By default, this will attempt to auto-detect based on the name of the namespace where a prefix of env_, role_ or node_ would refer to those respective levels.
+* precedence: The precedence level to apply to, which may be either environment, role or node.
 * prefix: The prefix to apply to the namespace name and which defaults to *common_attrs.namespaces.prefix*
 * compile_time: Whether to apply the namespace during compile or converge time.
 

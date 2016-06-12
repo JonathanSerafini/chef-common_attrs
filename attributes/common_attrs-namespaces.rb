@@ -5,8 +5,8 @@ default[:common_attrs][:namespaces].tap do |config|
   config[:active][:prepend] ||= begin
     data = []
     data << "env_#{node.environment.sub(/^_/,'')}"
-    data << "env_#{node.policy_group}"  if node.respond_to?(:policy_group)
-    data << "env_#{node.policy_name}"   if node.respond_to?(:policy_name)
+    data << "env_#{node.policy_group}"    if node.respond_to?(:policy_group)
+    data << "policy_#{node.policy_name}"  if node.respond_to?(:policy_name)
     data
   end.compact.uniq
 
