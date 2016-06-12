@@ -1,6 +1,10 @@
 common_attrs
 ======
 
+# 0.4.1
+* Enhancement
+  * Prefix autodetection ends up being overly complicated, revert that.
+
 # 0.4.0
 * Enhancement
   * Prefix environment, policy_group, policy_name with a word which enables
