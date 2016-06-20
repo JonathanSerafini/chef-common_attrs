@@ -6,11 +6,13 @@ default[:common_attrs][:environments].tap do |config|
 
   # Name of the data_bag_items to load first
   # @since 0.1.0
-  config[:active][:prepend] = [
-    node.environment,
-    node.policy_group,
-    node.policy_name
-  ].compact.uniq
+  config[:active][:prepend] ||= begin
+    data = []
+    data << "env_#{node.environment.sub(/^_/,'')}"
+    data << "env_#{node.policy_group}"    if node.respond_to?(:policy_group)
+    data << "policy_#{node.policy_name}"  if node.respond_to?(:policy_name)
+    data
+  end.compact.uniq
 
   # Name of the data_bag_items to load second
   # @since 0.1.0
