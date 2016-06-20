@@ -53,7 +53,7 @@ An array of data_bag_item names which is used by the *common_attrs::environments
 By default, this array will contain the following entries :
 * env_#{node.environment.sub(/^\_/,'')} : the current environment or 'default'
 * env_#{node.policy_group} : the policy_group name if defined
-* env_#{node.policy_name} : the policy_name if defined
+* policy_#{node.policy_name} : the policy_name if defined
 
 ###### common_attrs.environments.active.custom
 
@@ -126,7 +126,7 @@ An array of namespace names which is used by the *common_attrs::namespace* recip
 By default, this array will contain the following entries :
 * env_#{node.environment.sub(/^\_/,'')} : the current environment or 'default'
 * env_#{node.policy_group} : the policy_group name if defined
-* env_#{node.policy_name} : the policy_name if defined
+* policy_#{node.policy_name} : the policy_name if defined
 
 ###### common_attrs.namespaces.active.custom
 
@@ -139,12 +139,6 @@ By default, this array is left empty and is provided to allow you to extend with
 ###### common_attrs::namespaces
 
 This recipe will automatically create *common_namespace* resources based on the values found in attributes, first for prepend and then for custom.
-
-#### Recipe
-
-###### common_attrs::environments
-
-This recipe will automatically create *common_environment* resources based on the values found in attributes, first for *prepend* and then for *custom*.
 
 #### Resources
 
