@@ -1,6 +1,10 @@
 common_attrs
 ======
 
+# 0.4.2
+* Bugfix
+  * New namespace/environment loaders were not setting attributes correctly
+
 # 0.4.1
 * Enhancement
   * Prefix autodetection ends up being overly complicated, revert that.
