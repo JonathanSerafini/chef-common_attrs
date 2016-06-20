@@ -6,7 +6,7 @@ default[:common_attrs][:environments].tap do |config|
 
   # Name of the data_bag_items to load first
   # @since 0.1.0
-  config[:active][:prepend] ||= begin
+  config[:active][:prepend] = begin
     data = []
     data << "env_#{node.environment.sub(/^_/,'')}"
     data << "env_#{node.policy_group}"    if node.respond_to?(:policy_group)
