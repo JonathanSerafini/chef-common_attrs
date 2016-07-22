@@ -1,6 +1,10 @@
 common_attrs
 ======
 
+# 0.4.3
+* Bugfix
+  * Better detect when policy is enabled
+
 # 0.4.2
 * Bugfix
   * New namespace/environment loaders were not setting attributes correctly
