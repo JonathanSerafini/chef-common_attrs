@@ -18,5 +18,4 @@
 #   }
 # }
 # ```
-default['common_attrs']['blacklisted'] ||= {}
-
+default['common_attrs']['blacklisted'] = {}
