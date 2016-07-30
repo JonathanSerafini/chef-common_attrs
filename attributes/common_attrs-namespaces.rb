@@ -24,4 +24,3 @@ default['common_attrs']['namespaces'].tap do |config|
   # @since 0.1.0
   config['compile_time'] = true
 end
-

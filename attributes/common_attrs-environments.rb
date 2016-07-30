@@ -28,4 +28,3 @@ default['common_attrs']['environments'].tap do |config|
   # @since 0.1.0
   config['ignore_missing'] = false
 end
-

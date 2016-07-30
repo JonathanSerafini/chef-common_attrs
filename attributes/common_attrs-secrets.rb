@@ -20,4 +20,3 @@ default['common_attrs']['secrets'].tap do |config|
   # ```
   config['active'] = {}
 end
-
