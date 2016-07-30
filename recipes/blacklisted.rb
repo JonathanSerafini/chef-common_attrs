@@ -10,7 +10,7 @@ Chef.event_handler do
     node['common_attrs']['blacklisted'].each do |key, value|
       # Skip unless enabled
       next if value === false
-      
+
       attribute_path = key.split('.')
 
       # Skip if attribute is not found

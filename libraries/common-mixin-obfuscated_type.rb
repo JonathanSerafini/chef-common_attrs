@@ -11,7 +11,7 @@ module Common
       # @return [String] the obfuscated string
       # @since 0.1.0
       def to_text
-        "**suppressed sensitive output**"
+        '**suppressed sensitive output**'
       end
     end
   end

@@ -9,7 +9,7 @@ module Common
       def to_common_data
         data = Mash.new(to_hash)
 
-        data.delete_if do |key,_|
+        data.delete_if do |key, _|
           %w(id chef_type data_bag).include?(key)
         end
 

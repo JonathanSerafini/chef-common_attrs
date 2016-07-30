@@ -2,16 +2,16 @@ require_relative 'common-mixin-obfuscated_type'
 
 module Common
   module Delegator
-    # A simple delegator which will ensure that we can provide any wrapped 
+    # A simple delegator which will ensure that we can provide any wrapped
     # object with methods from Common::Mixin::ObfuscatedType.
-    # 
+    #
     # The delegator will be used to wrap around objects that we set in either
     # node attributes or resource properties in order to ensure that the
     # objects are neither printed out to logs or sent to chef server.
     #
     # Unfortunately, I haven't found a non-EVIL way of doing this, so I'm
     # being an asshole and replacing `class`, `is_a?` and `kind_of?` to make
-    # sure that that the objects will be used transparently by Chef. Without 
+    # sure that that the objects will be used transparently by Chef. Without
     # some of these EVIL hacks, we'd fail property type checking.
     #
     # @example

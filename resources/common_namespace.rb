@@ -1,4 +1,4 @@
-# A common_namespace resource is used to overlay attributes found within a 
+# A common_namespace resource is used to overlay attributes found within a
 # given namespace to the root level attributes.
 #
 # @since 0.1.0
@@ -30,7 +30,7 @@ property :destination,
 # The level of precendence to apply attributes at
 property :precedence,
   kind_of: String,
-  default: "environment"
+  default: 'environment'
 
 # An optional prefix to prepend to the namespace name
 property :prefix,
@@ -78,18 +78,18 @@ end
 def apply_hash(hash)
   destination = destination.nil? ? node : fetch_attribute(destination, nil)
   destination = destination.attributes if destination.is_a?(Chef::Node)
-  raise ArgumentError.new "node attribute not found" if destination.nil?
+  raise ArgumentError.new 'node attribute not found' if destination.nil?
 
   hash.keys.each do |key|
     Chef::Log.debug("#{self} applying namespace to node.#{key}")
   end
 
   case precedence
-  when "environment"
+  when 'environment'
     destination.env_default = DeepMerge.merge(destination.env_default, hash)
-  when "role"
+  when 'role'
     destination.role_default = DeepMerge.merge(destination.role_default, hash)
-  when "node"
+  when 'node'
     destination.default = DeepMerge.merge(destination.default, hash)
   else raise ArgumentError.new "Invalid scope defined: #{scope}"
   end

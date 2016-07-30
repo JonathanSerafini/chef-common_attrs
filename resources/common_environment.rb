@@ -2,7 +2,7 @@
 # pattern which is used with Policy Files to replicate the concept of a global
 # configuration space.
 #
-# This will load an (protentially encrypted) data_bag_item and then apply it 
+# This will load an (protentially encrypted) data_bag_item and then apply it
 # at the desired precedence level.
 #
 # @since 0.1.0
@@ -30,8 +30,8 @@ property :data_bag,
 # The level of precendence to apply attributes at
 property :precedence,
   kind_of: String,
-  equal_to: ["environment","role","node"],
-  default: "environment"
+  equal_to: %w(environment role node),
+  default: 'environment'
 
 # Whether to apply the resource at compile time
 property :compile_time,
@@ -74,13 +74,13 @@ action :apply do
   end
 
   case precedence
-  when "environment"
+  when 'environment'
     apply_hash(:env_default, item_data.fetch(:default_attributes, {}))
     apply_hash(:env_override, item_data.fetch(:override_attributes, {}))
-  when "role"
+  when 'role'
     apply_hash(:role_default, item_data.fetch(:default_attributes, {}))
     apply_hash(:role_override, item_data.fetch(:override_attributes, {}))
-  when "node"
+  when 'node'
     apply_hash(:default, item_data.fetch(:default_attributes, {}))
   else raise ArgumentError.new "invalid scope defined: #{scope}"
   end

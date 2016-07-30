@@ -53,7 +53,7 @@ include Chef::DSL::DataQuery
 action :apply do
   run_state = node.run_state
 
-  if run_state['common_secrets'] and run_state['common_secrets'][secrets_name]
+  if run_state['common_secrets'] && run_state['common_secrets'][secrets_name]
     @new_resource.updated_by_last_action(false)
   else
     data = data_bag_item(new_resource.secrets_bag, new_resource.secrets_item)

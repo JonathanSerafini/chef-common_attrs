@@ -59,7 +59,7 @@ action :apply do
     compile_time true
   end
 
-  # To fetch the data from run_state we require the 
+  # To fetch the data from run_state we require the
   # common_secrets.secret_name
   secrets_name = r.secrets_name
   secrets_path = new_resource.secrets_path
@@ -83,7 +83,7 @@ end
 # ensure that it is cleaned up at the end of the Chef run.
 def obfuscate(data, path)
   if data.is_a?(Hash)
-    return data.map{|k,v| [k,obfuscate(v, [path,k].join("."))]}.to_h
+    return data.map { |k, v| [k, obfuscate(v, [path, k].join('.'))] }.to_h
   else
     # Ensure that the secret is added to the attribute blacklist to ensure
     # that it is not saved back to the chef server.
@@ -93,13 +93,13 @@ def obfuscate(data, path)
 end
 
 # Create a nested hash to use when merging onto node attributes for a secret.
-# 
+#
 # @param destination [String] a period delimited string refering to an attr
 # @param secret [String] the secret to set
 # @return [Hash]
 # @since 0.1.0
 def generate_secret_hash(destination, secret)
-  path = destination.split(".")
+  path = destination.split('.')
   last = path.pop
 
   data = {}

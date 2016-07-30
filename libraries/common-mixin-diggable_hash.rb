@@ -3,11 +3,11 @@ module Common
     module DiggableHash
       module DigLookup
         # Provide a mechanism to lookup a deeply nested hash key by providing
-        # it with an array of keys. Should any of the keys not be present, 
+        # it with an array of keys. Should any of the keys not be present,
         # `nil` will be return.
         #
         # This is effectively backporting the method from Ruby 2.3
-        # 
+        #
         # @param *path [String,Symbol] * keys describing the path
         # @return [Mix, Nil]
         # @since 0.1.0
@@ -29,9 +29,9 @@ module Common
       end
 
       # Provide a mechanism to set the value of a deeply nested hash key
-      # by providing it with an array of keys and a value. 
+      # by providing it with an array of keys and a value.
       #
-      # This will return an exception if the parent object was not found or 
+      # This will return an exception if the parent object was not found or
       # is not a Hash.
       #
       # @param *path [String,Symbol] * keys describing the path

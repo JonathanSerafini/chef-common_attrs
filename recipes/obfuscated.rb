@@ -3,8 +3,8 @@ Chef.event_handler do
   # for runtime, we will iterate through the list attributes we wish to
   # obfuscate and overwrite them.
   #
-  # Ideally we would of had just ObfuscatedType.to_json sitting within the 
-  # attribute tree however Chef uses Yajl which doesn't call the method. 
+  # Ideally we would of had just ObfuscatedType.to_json sitting within the
+  # attribute tree however Chef uses Yajl which doesn't call the method.
   #
   # /sadpanda
   # @since 0.1.2
@@ -26,8 +26,8 @@ Chef.event_handler do
 
       # Assign value
       node.default.common_assign_at(
-        *key.split('.'), 
-        "**suppressed sensitive output**"
+        *key.split('.'),
+        '**suppressed sensitive output**'
       )
     end
   end

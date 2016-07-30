@@ -15,7 +15,7 @@ module Common
                elsif hash.respond_to?(:to_hash)
                then hash.to_hash
                else hash.to_h
-               end 
+               end
 
         data.each do |key, value|
           if respond_to?(key.to_sym)
