@@ -1,4 +1,3 @@
-
 Chef.event_handler do
   # On converge_complete, when we no longer need to actual values of attributes
   # for runtime, we will iterate through the list attributes we wish to
@@ -12,7 +11,7 @@ Chef.event_handler do
   on :converge_complete do
     node = Chef.run_context.node
 
-    node[:common_attrs][:obfuscated].each do |key, value|
+    node['common_attrs']['obfuscated'].each do |key, value|
       # Skip unless enabled
       next if value === false
 
@@ -33,4 +32,3 @@ Chef.event_handler do
     end
   end
 end
-

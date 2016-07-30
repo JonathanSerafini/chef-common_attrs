@@ -18,5 +18,5 @@
 #   }
 # }
 # ```
-default[:common_attrs][:obfuscated] ||= {}
+default['common_attrs']['obfuscated'] ||= {}
 
