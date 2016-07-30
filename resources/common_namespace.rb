@@ -35,12 +35,12 @@ property :precedence,
 # An optional prefix to prepend to the namespace name
 property :prefix,
   kind_of: [String, NilClass],
-  default: lazy { node[:common_attrs][:namespaces][:prefix] }
+  default: lazy { node['common_attrs']['namespaces']['prefix'] }
 
 # Whether to apply the namespact at compile or converge time
 property :compile_time,
   kind_of: [TrueClass, FalseClass],
-  default: lazy { node[:common_attrs][:namespaces][:compile_time] }
+  default: lazy { node['common_attrs']['namespaces']['compile_time'] }
 
 def after_created
   if compile_time

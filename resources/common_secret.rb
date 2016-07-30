@@ -18,7 +18,7 @@ property :secrets_path,
 # The data bag to fetch the secrets from
 property :secrets_bag,
   kind_of: String,
-  default: lazy { |r| node[:common_attrs][:secrets][:data_bag] }
+  default: lazy { |r| node['common_attrs']['secrets']['data_bag'] }
 
 # The data bag item to fetch the secrets from
 property :secrets_item,
@@ -28,7 +28,7 @@ property :secrets_item,
 # Whether to apply this immediately at compile time
 property :compile_time,
   kind_of: [TrueClass, FalseClass],
-  default: lazy { node[:common_attrs][:secrets][:compile_time] },
+  default: lazy { node['common_attrs']['secrets']['compile_time'] },
   desired_state: false
 
 # Ensure that the resource is applied regardless of whether we are in why_run
@@ -63,7 +63,7 @@ action :apply do
   # common_secrets.secret_name
   secrets_name = r.secrets_name
   secrets_path = new_resource.secrets_path
-  secrets = node.run_state[:common_secrets][secrets_name]
+  secrets = node.run_state['common_secrets'][secrets_name]
   secret = secrets.dig(*secrets_path.split('.'))
 
   # Set the value as an ObfuscatedType to ensure that the output
@@ -87,7 +87,7 @@ def obfuscate(data, path)
   else
     # Ensure that the secret is added to the attribute blacklist to ensure
     # that it is not saved back to the chef server.
-    node.default[:common_attrs][:obfuscated][path] = true
+    node.default['common_attrs']['obfuscated'][path] = true
     return Common::Delegator::ObfuscatedType.new(data)
   end
 end

@@ -25,7 +25,7 @@ property :environment,
 # The data_bag to fetch the environment from
 property :data_bag,
   kind_of: String,
-  default: lazy { node[:common_attrs][:environments][:data_bag] }
+  default: lazy { node['common_attrs']['environments']['data_bag'] }
 
 # The level of precendence to apply attributes at
 property :precedence,
@@ -36,12 +36,12 @@ property :precedence,
 # Whether to apply the resource at compile time
 property :compile_time,
   kind_of: [TrueClass, FalseClass],
-  default: lazy { node[:common_attrs][:environments][:compile_time] }
+  default: lazy { node['common_attrs']['environments']['compile_time'] }
 
 # Whether we should ignore missing items or raise an error
 property :ignore_missing,
   kind_of: [TrueClass, FalseClass],
-  default: lazy { node[:common_attrs][:environments][:ignore_missing] }
+  default: lazy { node['common_attrs']['environments']['ignore_missing'] }
 
 # Ensure that the resource is applied regardless of whether we are in why_run
 # or standard mode.
@@ -117,4 +117,3 @@ def apply_hash(collection_name, data)
     data
   ))
 end
-

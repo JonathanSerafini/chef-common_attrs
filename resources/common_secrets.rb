@@ -14,7 +14,7 @@ property :secrets_item,
 # The data bag to fetch the secrets from
 property :secrets_bag,
   kind_of: String,
-  default: lazy { node[:common_attrs][:secrets][:data_bag] }
+  default: lazy { node['common_attrs']['secrets']['data_bag'] }
 
 # The unique identifier for this secrets container which is used to store the
 # values in the run_state
@@ -25,7 +25,7 @@ property :secrets_name,
 # Whether to apply this immediately at compile time
 property :compile_time,
   kind_of: [TrueClass, FalseClass],
-  default: lazy { node[:common_attrs][:secrets][:compile_time] },
+  default: lazy { node['common_attrs']['secrets']['compile_time'] },
   desired_state: false
 
 # Ensure that the resource is applied regardless of whether we are in why_run
@@ -53,12 +53,12 @@ include Chef::DSL::DataQuery
 action :apply do
   run_state = node.run_state
 
-  if run_state[:common_secrets] and run_state[:common_secrets][secrets_name]
+  if run_state['common_secrets'] and run_state['common_secrets'][secrets_name]
     @new_resource.updated_by_last_action(false)
   else
     data = data_bag_item(new_resource.secrets_bag, new_resource.secrets_item)
     data = data.to_common_namespace
-    node.run_state[:common_secrets] ||= {}
-    node.run_state[:common_secrets][secrets_name] = data
+    node.run_state['common_secrets'] ||= {}
+    node.run_state['common_secrets'][secrets_name] = data
   end
 end
