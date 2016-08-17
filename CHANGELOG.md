@@ -1,19 +1,28 @@
 common_attrs
 ======
 
-# 0.4.3
+v0.4.4
+------
+* Bugfix
+  * to\_common\_namespace did not correctly detect namespace attributes
+
+v0.4.3
+------
 * Bugfix
   * Better detect when policy is enabled
 
-# 0.4.2
+v0.4.2
+------
 * Bugfix
   * New namespace/environment loaders were not setting attributes correctly
 
-# 0.4.1
+v0.4.1
+------
 * Enhancement
   * Prefix autodetection ends up being overly complicated, revert that.
 
-# 0.4.0
+v0.4.0
+------
 * Enhancement
   * Prefix environment, policy_group, policy_name with a word which enables
     autodetection of precedence levels. On one hand, it makes that easier, on
@@ -23,21 +32,24 @@ common_attrs
   * Fixed an issue where the attributes would throw an exception when the node
     did not support policies
 
-# 0.3.0
+v0.3.0
+------
 * Enhancement
   * Allow common_environment to apply to node.default
   * Allow common_namespace to apply to node.default
 
-# 0.2.0
+v0.2.0
+------
 * Enhancement
   * Provide support for loading entire hashes from common_secret instead of
     only allowing single keys.
 
-# 0.1.5
+v0.1.5
+------
 * Add attribute blacklisting
 * Add whyrun support/bypass to all common_attr resources
 
-# 0.1.4
-------------------
+v0.1.4
+------
 * Add EncryptedDataBagItem monkey patches
 
