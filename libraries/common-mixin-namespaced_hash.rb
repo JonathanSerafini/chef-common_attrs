@@ -8,13 +8,14 @@ module Common
       # @return [Mash]
       # @since 0.1.0
       def to_common_namespace(*namespaces)
-        prefix = Chef.run_context.node['common_attrs']['namespaces']['prefix']
+        attributes = Chef.run_context.node['common_attrs']['namespaces']
+        prefix = attributes['prefix']
 
         # Convenience to ensure we're using namespaces even if unset
         if Array(namespaces).empty?
           namespaces = [
-            Chef.run_context.node['common_attrs']['namespaces']['prepend'],
-            Chef.run_context.node['common_attrs']['namespaces']['custom'],
+            attributes['active']['prepend'],
+            attributes['active']['custom']
           ].flatten.compact.uniq
         end
 
@@ -34,7 +35,7 @@ module Common
 
         namespaces.each do |namespace|
           attr_hash = data.fetch(namespace, {})
-          data = Chef::Mixin::DeepMerge.merge(data, attr_hash)
+          Chef::Mixin::DeepMerge.deep_merge!(attr_hash, data)
         end
 
         # Return
