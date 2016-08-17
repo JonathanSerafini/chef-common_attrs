@@ -35,7 +35,7 @@ module Common
 
         namespaces.each do |namespace|
           attr_hash = data.fetch(namespace, {})
-          data = Chef::Mixin::DeepMerge.merge(data, attr_hash)
+          Chef::Mixin::DeepMerge.deep_merge!(attr_hash, data)
         end
 
         # Return
