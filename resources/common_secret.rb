@@ -1,4 +1,3 @@
-
 # A common_secret resource will be used to load a specific secret from a
 # common_secrets and apply it to node attributes.
 #
@@ -109,7 +108,10 @@ def generate_secret_hash(destination, secret)
     current = current[item] = {}
   end
 
-  current[last] = secret
+  if path.empty? then data = secret
+  else current[last] = secret
+  end
+
   data
 end
 
