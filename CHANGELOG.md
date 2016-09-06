@@ -1,6 +1,11 @@
 common_attrs
 ======
 
+v0.4.5
+------
+* Bugfix
+  * allow common\_secret to work when attribute_path is a '.'
+
 v0.4.4
 ------
 * Bugfix
