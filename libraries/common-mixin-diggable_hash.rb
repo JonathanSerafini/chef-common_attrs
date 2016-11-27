@@ -39,7 +39,8 @@ module Common
       # @since 0.1.0
       def common_assign_at(*path, value)
         last_item = path.pop
-        dig(*path)[last_item] = value
+        path_attr = path.inject(self) { |location, key| location[key] }
+        path_attr[last_item] = value
       end
     end
   end
