@@ -68,7 +68,6 @@ action :apply do
   # Set the value as an ObfuscatedType to ensure that the output
   # is never exposed to Chef Server
   secret = obfuscate(secret, attribute_path)
-
   unless secret
     raise KeyError.new "secret not found with path #{secrets_path}"
   end
@@ -82,7 +81,9 @@ end
 # ensure that it is cleaned up at the end of the Chef run.
 def obfuscate(data, path)
   if data.is_a?(Hash)
-    return data.map { |k, v| [k, obfuscate(v, [path, k].join('.'))] }.to_h
+    return data.map do |k, v|
+      [k, obfuscate(v, [path, k].reject { |p| p == '.' }.join('.'))]
+    end.to_h
   else
     # Ensure that the secret is added to the attribute blacklist to ensure
     # that it is not saved back to the chef server.
