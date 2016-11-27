@@ -1,5 +1,11 @@
-common_attrs
+common\_attrs
 ======
+
+v0.4.6
+------
+* Bugfix
+  * Resolve bug where secrets did not obfuscate when not nested
+  * Resolve bug preventing assigning to keys without parents
 
 v0.4.5
 ------
